@@ -42,6 +42,10 @@ class NetworkRoutingSolver:
         # Check if the node is the source node
         while node.node_id != self.source:
             # Get parent node
+            if self.results[node.node_id]['prev'] == -1:
+                path_edges = []
+                total_length = math.inf
+                break
             prev = self.network.nodes[self.results[node.node_id]['prev']]
             # Get the neighbors of prev
             neighbors = prev.neighbors
