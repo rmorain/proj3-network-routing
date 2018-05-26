@@ -9,6 +9,7 @@ class BinaryHeap:
         self.heap.append(x)     # Append the new element on the end of the array
 
         # Percolate up
+        # Percolating up is log(V) operation because at worst case it needs to percolate up the whole tree.
         self.percolate_up(x, len(self.heap) - 1)
 
     def delete_min(self):
@@ -18,10 +19,13 @@ class BinaryHeap:
         self.heap.pop()     # Pop the last item on the index
 
         # Percolate down
+        # Percolating down is log(V) operation because at worst case it needs to percolate down the whole tree.
         self.percolate_down(x, 1)
 
         return first
 
+    # Updating a value needs to be O(V) at the worst case to avoid missing the target node
+    # The tree is only partially sorted
     def update(self, node_id, dist):
         for i in range(1, len(self.heap)):
             if self.heap[i]['id'] == node_id:
@@ -30,7 +34,7 @@ class BinaryHeap:
                 # self.percolate_down(self.heap[i], i)
                 break
 
-
+    # Log(V) operation because we divide the position by 2 every step
     def percolate_up(self, x, pos):
         # Percolate up
 
@@ -44,6 +48,7 @@ class BinaryHeap:
             # Update the position of the new element
             pos = int(pos / 2)
 
+    # Log(V) operation because we multiply the position by 2 every step
     def percolate_down(self, x, pos):
         # Percolate down
         # Check if we are at the bottom of the tree

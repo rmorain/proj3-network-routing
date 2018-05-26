@@ -158,6 +158,7 @@ class PriorityQueue:
         # Pop the highest priority element off the queue
         if not self.use_heap:
             # Pop the smallest distance item of the array
+            # O(n) because we need to iterate through each element in the array
             smallest_distance = math.inf    # Initialize to infinity
             smallest_key = -1
             # For each element in the queue
@@ -170,7 +171,7 @@ class PriorityQueue:
                 popped_item = self.queue.popitem()
                 return {'id': popped_item[0], 'dist': popped_item[1]['dist']}
             # Remove the element from queue
-            del self.queue[smallest_key]
+            del self.queue[smallest_key]    # Delete in constant time
             # Return the smallest distance node
             return smallest_node
         else:
@@ -180,6 +181,7 @@ class PriorityQueue:
     def update_key(self, node_id, dist):
         # Update the distance of a specified vertex
         if not self.use_heap:
+            # Constant time O(1)
             self.queue[node_id]['dist'] = dist
         else:
             self.queue.update(node_id, dist)
